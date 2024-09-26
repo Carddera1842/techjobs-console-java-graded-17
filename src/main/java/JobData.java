@@ -10,9 +10,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by LaunchCode
- */
 public class JobData {
 
     private static final String DATA_FILE = "src/main/resources/job_data.csv";
@@ -20,13 +17,6 @@ public class JobData {
 
     private static ArrayList<HashMap<String, String>> allJobs;
 
-    /**
-     * Fetch list of all values from loaded data,
-     * without duplicates, for a given column.
-     *
-     * @param field The column to retrieve values from
-     * @return List of all of the values of the given field
-     */
     public static ArrayList<String> findAll(String field) {
 
         // load data, if not already loaded
@@ -57,17 +47,6 @@ public class JobData {
         return new ArrayList<>(allJobs);
     }
 
-    /**
-     * Returns results of search the jobs data by key/value, using
-     * inclusion of the search term.
-     *
-     * For example, searching for employer "Enterprise" will include results
-     * with "Enterprise Holdings, Inc".
-     *
-     * @param column   Column that should be searched.
-     * @param value Value of teh field to search for
-     * @return List of all jobs matching the criteria
-     */
     public static ArrayList<HashMap<String, String>> findByColumnAndValue(String column, String value) {
 
         // load data, if not already loaded
@@ -87,12 +66,6 @@ public class JobData {
         return jobs;
     }
 
-    /**
-     * Search all columns for the given term
-     *
-     * @param value The search term to look for
-     * @return      List of all jobs with at least one field containing the value
-     */
     public static ArrayList<HashMap<String, String>> findByValue(String value) {
 
         // load data, if not already loaded
@@ -102,27 +75,19 @@ public class JobData {
 
         for (HashMap<String, String> job : allJobs) {
 
-            boolean searchFound = false;
-
             for (String key : job.keySet()) {
-                String fieldValue = job.get(key).toLowerCase();
-                if (fieldValue.contains(value.toLowerCase())) {
-                    searchFound = true;
-                    break;
-                }
-            }
 
-            if (searchFound && !jobSearch.contains(job)) {
-                jobSearch.add(job);
+                String aValue = job.get(key).toLowerCase();
+
+                if (aValue.contains(value.toLowerCase())) {
+                    jobSearch.add(job);
+                }
             }
         }
 
         return jobSearch;
     }
 
-    /**
-     * Read in data from a CSV file and store it in a list
-     */
     private static void loadData() {
 
         // Only load data once

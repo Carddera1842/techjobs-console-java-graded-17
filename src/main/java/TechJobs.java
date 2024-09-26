@@ -1,15 +1,11 @@
 import java.util.*;
 
-/**
- * Created by LaunchCode
- */
 public class TechJobs {
 
     static Scanner in = new Scanner(System.in);
 
     public static void main (String[] args) {
 
-        // Initialize our field map with key/name pairs
         HashMap<String, String> columnChoices = new HashMap<>();
         columnChoices.put("core competency", "Skill");
         columnChoices.put("employer", "Employer");
@@ -17,14 +13,12 @@ public class TechJobs {
         columnChoices.put("position type", "Position Type");
         columnChoices.put("all", "All");
 
-        // Top-level menu options
         HashMap<String, String> actionChoices = new HashMap<>();
         actionChoices.put("search", "Search");
         actionChoices.put("list", "List");
 
         System.out.println("Welcome to LaunchCode's TechJobs App!");
 
-        // Allow the user to search until they manually quit
         while (true) {
 
             String actionChoice = getUserSelection("View jobs by (type 'x' to quit):", actionChoices);
@@ -49,7 +43,7 @@ public class TechJobs {
                     }
                 }
 
-            } else { // choice is "search"
+            } else {
 
                 // How does the user want to search (e.g. by skill or employer)
                 String searchField = getUserSelection("Search by:", columnChoices);
@@ -67,7 +61,6 @@ public class TechJobs {
         }
     }
 
-    // ﻿Returns the key of the selected item from the choices Dictionary
     private static String getUserSelection(String menuHeader, HashMap<String, String> choices) {
 
         int choiceIdx = -1;
@@ -114,7 +107,6 @@ public class TechJobs {
         return choiceKeys[choiceIdx];
     }
 
-    // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
         if (someJobs.isEmpty()) {
