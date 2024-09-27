@@ -19,7 +19,6 @@ public class JobData {
 
     public static ArrayList<String> findAll(String field) {
 
-        // load data, if not already loaded
         loadData();
 
         ArrayList<String> values = new ArrayList<>();
@@ -40,7 +39,6 @@ public class JobData {
 
     public static ArrayList<HashMap<String, String>> findAll() {
 
-        // load data, if not already loaded
         loadData();
 
         // Bonus mission; normal version returns allJobs
@@ -49,7 +47,6 @@ public class JobData {
 
     public static ArrayList<HashMap<String, String>> findByColumnAndValue(String column, String value) {
 
-        // load data, if not already loaded
         loadData();
 
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
@@ -68,20 +65,26 @@ public class JobData {
 
     public static ArrayList<HashMap<String, String>> findByValue(String value) {
 
-        // load data, if not already loaded
         loadData();
 
         ArrayList<HashMap<String, String>> jobSearch = new ArrayList<>();
 
         for (HashMap<String, String> job : allJobs) {
 
+            boolean searchFound = false;
+
             for (String key : job.keySet()) {
 
                 String aValue = job.get(key).toLowerCase();
 
                 if (aValue.contains(value.toLowerCase())) {
-                    jobSearch.add(job);
+                    searchFound = true;
+                    break;
                 }
+            }
+
+            if (searchFound && !jobSearch.contains(job)) {
+                jobSearch.add(job);
             }
         }
 
